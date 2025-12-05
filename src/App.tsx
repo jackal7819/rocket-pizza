@@ -1,7 +1,25 @@
+import { RouterProvider, createBrowserRouter } from 'react-router';
+
+import Cart from './components/cart/Cart';
+import CreateOrder from './components/order/CreateOrder';
+import Home from './components/ui/Home';
+import Menu from './components/menu/Menu';
+import Order from './components/order/Order';
+
+const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <Home />,
+	},
+	{
+		path: '/menu',
+		element: <Menu />,
+	},
+	{ path: '/cart', element: <Cart /> },
+	{ path: '/order/new', element: <CreateOrder /> },
+	{ path: '/order/:orderId', element: <Order /> },
+]);
+
 export default function App() {
-	return (
-		<div>
-			<h1 className='text-3xl font-bold underline'>Hello world!</h1>
-		</div>
-	);
+	return <RouterProvider router={router} />;
 }
