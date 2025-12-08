@@ -1,14 +1,16 @@
-import { formatCurrency } from '../../utils/helpers'
+import { formatCurrency } from '../../utils/helpers';
+
+export interface Pizza {
+	id: number;
+	name: string;
+	unitPrice: number;
+	ingredients: string[];
+	soldOut: boolean;
+	imageUrl: string;
+}
 
 interface MenuItemProps {
-	pizza: {
-		id: number;
-		name: string;
-		unitPrice: number;
-		ingredients: string[];
-		soldOut: boolean;
-		imageUrl: string;
-	};
+	pizza: Pizza;
 }
 
 export default function MenuItem({ pizza }: MenuItemProps) {
@@ -18,7 +20,9 @@ export default function MenuItem({ pizza }: MenuItemProps) {
 		<li>
 			<img src={imageUrl} alt={name} />
 			<div>
-				<p>{id}. {name}</p>
+				<p>
+					{id}. {name}
+				</p>
 				<p>{ingredients.join(', ')}</p>
 				<div>{!soldOut ? <p>{formatCurrency(unitPrice)}</p> : <p>Sold out</p>}</div>
 			</div>
