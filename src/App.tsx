@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from 'react-router';
 
 import AppLayout from './components/ui/AppLayout';
-import Cart from './components/cart/Cart';
+import Cart from './components/korb/Cart';
 import CreateOrder from './components/order/CreateOrder';
 import Home from './components/ui/Home';
 import Menu from './components/menu/Menu';

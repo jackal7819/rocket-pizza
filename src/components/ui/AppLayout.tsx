@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router';
 
-import CartOverview from '../cart/CartOverview';
+import CartOverview from '../korb/CartOverview';
 import Header from './Header';
 
 export default function AppLayout() {
