@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router';
 
+import AppLayout from './components/ui/AppLayout';
 import Cart from './components/cart/Cart';
 import CreateOrder from './components/order/CreateOrder';
 import Home from './components/ui/Home';
@@ -8,16 +9,21 @@ import Order from './components/order/Order';
 
 const router = createBrowserRouter([
 	{
-		path: '/',
-		element: <Home />,
+		element: <AppLayout />,
+		children: [
+			{
+				path: '/',
+				element: <Home />,
+			},
+			{
+				path: '/menu',
+				element: <Menu />,
+			},
+			{ path: '/cart', element: <Cart /> },
+			{ path: '/order/new', element: <CreateOrder /> },
+			{ path: '/order/:orderId', element: <Order /> },
+		],
 	},
-	{
-		path: '/menu',
-		element: <Menu />,
-	},
-	{ path: '/cart', element: <Cart /> },
-	{ path: '/order/new', element: <CreateOrder /> },
-	{ path: '/order/:orderId', element: <Order /> },
 ]);
 
 export default function App() {
