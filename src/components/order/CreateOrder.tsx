@@ -1,7 +1,16 @@
+import { Form } from 'react-router';
 import { useState } from 'react';
 
-const isValidPhone = (str: string) =>
-	/^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(str);
+interface CartItem {
+	pizzaId: number;
+	name: string;
+	quantity: number;
+	unitPrice: number;
+	totalPrice: number;
+}
+
+// const isValidPhone = (str: string) =>
+// 	/^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(str);
 
 const fakeCart = [
 	{
@@ -29,30 +38,35 @@ const fakeCart = [
 
 export default function CreateOrder() {
 	const [withPriority, setWithPriority] = useState(false);
-	const cart = fakeCart;
-	console.log(cart, isValidPhone('123'));
+	const cart: CartItem[] = fakeCart;
 
 	return (
 		<div>
 			<h2>Ready to order? Let's go!</h2>
 
-			<form>
+			<Form method='POST'>
 				<div>
 					<label htmlFor='customer'>First Name</label>
-					<input id='customer' type='text' name='customer' required />
+					<input id='customer' type='text' name='customer' required autoComplete='off' />
 				</div>
 
 				<div>
 					<label htmlFor='phone'>Phone number</label>
 					<div>
-						<input id='phone' type='tel' name='phone' required />
+						<input id='phone' type='tel' name='phone' required autoComplete='off' />
 					</div>
 				</div>
 
 				<div>
 					<label htmlFor='address'>Address</label>
 					<div>
-						<input id='address' type='text' name='address' required />
+						<input
+							id='address'
+							type='text'
+							name='address'
+							required
+							autoComplete='off'
+						/>
 					</div>
 				</div>
 
@@ -61,16 +75,18 @@ export default function CreateOrder() {
 						type='checkbox'
 						name='priority'
 						id='priority'
-						value={withPriority ? 'yes' : 'no'}
-						onChange={(e) => setWithPriority(e.target.checked)}
+						autoComplete='off'
+						value={withPriority ? 'on' : 'off'}
+						onChange={(event) => setWithPriority(event.target.checked)}
 					/>
 					<label htmlFor='priority'>Want to yo give your order priority?</label>
 				</div>
 
 				<div>
-					<button>Order now</button>
+					<input type='hidden' name='cart' value={JSON.stringify(cart)} />
+					<button type='submit'>Order now</button>
 				</div>
-			</form>
+			</Form>
 		</div>
 	);
 }

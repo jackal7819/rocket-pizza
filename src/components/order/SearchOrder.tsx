@@ -15,8 +15,10 @@ export default function SearchOrder() {
 	return (
 		<form onSubmit={handleSubmit}>
 			<input
-				aria-label='search'
+				aria-label='query'
+				name='query'
 				type='text'
+				autoComplete='off'
 				placeholder='Search order #'
 				value={query}
 				onChange={(event) => setQuery(event.target.value)}
