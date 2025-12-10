@@ -5,12 +5,14 @@ import Cart from './components/cart/Cart';
 import CreateOrder from './components/order/CreateOrder';
 import Home from './components/ui/Home';
 import Menu from './components/menu/Menu';
+import NotFound from './components/ui/NotFound';
 import Order from './components/order/Order';
 import { loader as menuLoader } from './components/menu/loader';
 
 const router = createBrowserRouter([
 	{
 		element: <AppLayout />,
+		errorElement: <NotFound />,
 		children: [
 			{
 				path: '/',
@@ -20,6 +22,7 @@ const router = createBrowserRouter([
 				path: '/menu',
 				element: <Menu />,
 				loader: menuLoader,
+				errorElement: <NotFound />,
 			},
 			{ path: '/cart', element: <Cart /> },
 			{ path: '/order/new', element: <CreateOrder /> },
@@ -29,7 +32,5 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-	return <RouterProvider
-  router={router}
-/>;
+	return <RouterProvider router={router} />;
 }
