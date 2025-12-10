@@ -1,45 +1,31 @@
+import { useLoaderData } from 'react-router';
+
 import { calcMinutesLeft, formatCurrency, formatDate } from '../../utils/helpers';
 
-const order = {
-	id: 'ABCDEF',
-	status: 'pending',
-	customer: 'Jonas',
-	phone: '123456789',
-	address: 'Arroios, Lisbon , Portugal',
-	priority: true,
-	estimatedDelivery: '2027-04-25T10:00:00',
-	cart: [
-		{
-			pizzaId: 7,
-			name: 'Napoli',
-			quantity: 3,
-			unitPrice: 16,
-			totalPrice: 48,
-		},
-		{
-			pizzaId: 5,
-			name: 'Diavola',
-			quantity: 2,
-			unitPrice: 16,
-			totalPrice: 32,
-		},
-		{
-			pizzaId: 3,
-			name: 'Romana',
-			quantity: 1,
-			unitPrice: 15,
-			totalPrice: 15,
-		},
-	],
-	position: '-9.000,38.000',
-	orderPrice: 95,
-	priorityPrice: 19,
-};
+export interface Order {
+	id: string;
+	status: string;
+	customer: string;
+	phone: string;
+	address: string;
+	priority: boolean;
+	estimatedDelivery: string;
+	cart: {
+		pizzaId: number;
+		name: string;
+		quantity: number;
+		unitPrice: number;
+		totalPrice: number;
+	}[];
+	position: string;
+	orderPrice: number;
+	priorityPrice: number;
+}
 
 export default function Order() {
-	const { id, status, priority, priorityPrice, orderPrice, estimatedDelivery, cart } = order;
+	const order = useLoaderData();
+	const { status, priority, estimatedDelivery, orderPrice, priorityPrice } = order;
 	const deliveryIn = calcMinutesLeft(estimatedDelivery);
-	console.log(id, status, cart);
 
 	return (
 		<div>

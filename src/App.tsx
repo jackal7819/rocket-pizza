@@ -8,6 +8,7 @@ import Menu from './components/menu/Menu';
 import NotFound from './components/ui/NotFound';
 import Order from './components/order/Order';
 import { loader as menuLoader } from './components/menu/loader';
+import { loader as orderLoader } from './components/order/loader';
 
 const router = createBrowserRouter([
 	{
@@ -26,7 +27,12 @@ const router = createBrowserRouter([
 			},
 			{ path: '/cart', element: <Cart /> },
 			{ path: '/order/new', element: <CreateOrder /> },
-			{ path: '/order/:orderId', element: <Order /> },
+			{
+				path: '/order/:orderId',
+				element: <Order />,
+				loader: orderLoader,
+				errorElement: <NotFound />,
+			},
 		],
 	},
 ]);
