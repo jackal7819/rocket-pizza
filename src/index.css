@@ -26,7 +26,7 @@ body {
 	height: 100dvh;
 }
 
-.loader {
+.spinner {
 	width: 45px;
 	aspect-ratio: 0.75;
 	--c: no-repeat linear-gradient(#333 0 0);
