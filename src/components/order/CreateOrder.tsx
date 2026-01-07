@@ -1,4 +1,4 @@
-import { Form } from 'react-router';
+import { Form, useActionData, useNavigation } from 'react-router';
 import { useState } from 'react';
 
 interface CartItem {
@@ -8,9 +8,6 @@ interface CartItem {
 	unitPrice: number;
 	totalPrice: number;
 }
-
-// const isValidPhone = (str: string) =>
-// 	/^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(str);
 
 const fakeCart = [
 	{
@@ -39,6 +36,10 @@ const fakeCart = [
 export default function CreateOrder() {
 	const [withPriority, setWithPriority] = useState(false);
 	const cart: CartItem[] = fakeCart;
+	const navigation = useNavigation();
+	const isSubmitting = navigation.state === 'submitting';
+
+	const formErrors = useActionData();
 
 	return (
 		<div>
@@ -55,6 +56,7 @@ export default function CreateOrder() {
 					<div>
 						<input id='phone' type='tel' name='phone' required autoComplete='off' />
 					</div>
+					{formErrors?.phone && <p role='alert'>{formErrors.phone}</p>}
 				</div>
 
 				<div>
@@ -84,7 +86,9 @@ export default function CreateOrder() {
 
 				<div>
 					<input type='hidden' name='cart' value={JSON.stringify(cart)} />
-					<button type='submit'>Order now</button>
+					<button type='submit' disabled={isSubmitting}>
+						{isSubmitting ? 'Placing order...' : 'Order now'}
+					</button>
 				</div>
 			</Form>
 		</div>
